@@ -1,7 +1,7 @@
 var wunode = require("./wunode");
+var wuform = require("./wuform");
 var querystring = require('querystring');
 var url = require('url');
-
 
 function start(request, response){
 	console.log("Request handler for 'start' ");
@@ -49,6 +49,7 @@ function rebuild(request, response){
 
 			wunode.setSubdomain(subdomain);
 			wunode.setApiKey(apiKey);
+			wunode.setFormID(formID);
 
 			var fields;
 			wunode.getFields(formID, false, false, function(result){
@@ -59,7 +60,20 @@ function rebuild(request, response){
 				}
 				else{
 					fields = result.Fields;
-					redirectBody = wunode.rebuildForm(fields);
+					redirectBody = "<!DOCTYPE html>"+
+										"<html>"+
+											"<head>"+
+											"</head>"+
+											"<body>"+
+												"<form 'application/x-www-form-urlencoded' action='/results' method='get'>"+
+													"<input type='hidden' name=subdomain value="+subdomain+">"+
+													"<input type='hidden' name=formID value="+formID+">";
+
+					redirectBody += wuform.buildForm(fields);
+					redirectBody +=					"<input type='submit' value='Submit' />"+
+												"</form>"+
+											"</body>"+
+										"</html>";
 					response.writeHead(200, "OK", {'Content-Type': 'text/html'});
 					response.write(redirectBody);
 					response.end();
@@ -130,5 +144,61 @@ function rebuild(request, response){
 	
 }
 
+function results(request, response){
+	console.log("Request handler for 'results' ");
+	if(request.method === "POST"){
+		console.log("Handling POST");
+		
+	}
+	else if(request.method === "GET"){
+		
+		var url_parts = url.parse(request.url, true);
+		var query = url_parts.query;
+		console.log(query);
+		console.log("Handling GET for "+request.url);
+
+		var subdomain = query.subdomain;
+		var formID = query.formID;
+		var rawBody = "";
+		for (var property in query) {
+			if(property.indexOf("Field") > -1){
+				rawBody += property+"="+encodeURIComponent(query[property])+"&";
+			}
+		}
+		//Remove the last &
+		rawBody = rawBody.slice(0, -1);
+
+		//rawBody = request.url.substring(9);
+		var fullBody = "https://"+subdomain+".wufoo.com/forms/"+formID+"/def/"+rawBody;
+		console.log(rawBody);
+
+
+		// console.log("FormID "+formID);
+		// console.log("EntryID "+entryID);
+
+		var recoveredURL;
+		var redirectBody =	'<!DOCTYPE html>'+
+				'<html>'+
+					'<head>'+
+					'</head>'+
+					'<body>'+
+						fullBody+'</br>'+
+						'<a href='+fullBody+' target="_blank">Refill</a>'+
+					'</body>'+
+				'</html>';
+		response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+		response.write(redirectBody);
+			
+		response.end();
+	}
+	else{
+		response.writeHead(405, "Method not supported", {"Content-Type": "text/plain"});
+		response.write("405-Method not supported");
+		response.end();
+	}
+	
+}
+
 exports.start = start;
 exports.rebuild = rebuild;
+exports.results = results;
