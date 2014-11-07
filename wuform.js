@@ -24,6 +24,7 @@ var buildForm = function(fieldsArray){
 			continue;
 		}
 		//Call appropriate helper method to build HTML for this field
+		//For Checkbox, MulipleChoice, Dropdown, pass choices/subfields
 		switch (fieldType) { 
 			case "text":
 				formHTML += buildText(fieldLabel, fieldID);
@@ -35,13 +36,13 @@ var buildForm = function(fieldsArray){
 				formHTML += buildParagraph(fieldLabel, fieldID);
 				break;
 			case "checkbox":
-				formHTML += buildCheckbox(fieldLabel, fieldID);
+				formHTML += buildCheckbox(fieldLabel, fieldID, choices);
 				break;
 			case "radio":
-				formHTML += buildMultipleChoice(fieldLabel, fieldID);
+				formHTML += buildMultipleChoice(fieldLabel, fieldID, choices);
 				break;
 			case "select":
-				formHTML += buildDropdown(fieldLabel, fieldID);
+				formHTML += buildDropdown(fieldLabel, fieldID, choices);
 				break;
 			case "shortname":
 				formHTML += buildName(fieldLabel, fieldID);
@@ -107,21 +108,25 @@ var buildParagraph = function(fieldLabel, fieldID){
 	return fieldHTML;
 }
 
-var buildCheckbox = function(fieldLabel, fieldID){
+var buildCheckbox = function(fieldLabel, fieldID, choices){
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='text'  name="+fieldID+">";
+	fieldHTML += "<input type='checkbox'  name="+fieldID+">";
+	//create checkbox input for each choice
 	return fieldHTML;
 }
 
-var buildMultipleChoice = function(fieldLabel, fieldID){
+var buildMultipleChoice = function(fieldLabel, fieldID, choices){
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='text'  name="+fieldID+">";
+	fieldHTML += "<input type='radio'  name="+fieldID+">";
+	//create another radio for each choice, same name, different value (choice.label)
 	return fieldHTML;
 }
 
-var buildDropdown = function(fieldLabel, fieldID){
+var buildDropdown = function(fieldLabel, fieldID, choices){
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='text'  name="+fieldID+">";
+	fieldHTML += "<select name="+fieldID+">";
+	//add option tag, one for each choice value=choice.label
+	fieldHTML += "</select>";
 	return fieldHTML;
 }
 
