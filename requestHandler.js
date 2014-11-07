@@ -103,6 +103,55 @@ function results(request, response){
 	if(request.method === "POST"){
 		console.log("Handling POST");
 		
+
+		request.on("data", function(chunk){
+			rawBody += chunk.toString();
+		});
+
+		request.on("end", function(){
+			
+			//Get POST values //TODO
+			//var decodedBody = querystring.parse(rawBody);
+			//console.log(decodedBody);
+
+			//Extract Subdomain and formID from POST //TODO
+			var subdomain;
+			var formID;
+
+			//Loop through POST values and parse into key/value pairs //TODO
+			var parsedBody;
+			// for (var property in query) { //Need to get POST values into object format, iterate
+			// 	if(property.indexOf("Field") > -1){
+			// 		rawBody += property+"="+encodeURIComponent(query[property])+"&";
+			// 	}
+			// }
+			// //Remove the last &
+			// rawBody = rawBody.slice(0, -1);
+
+			//Use parsedBody instead
+			var fullBody = "https://"+subdomain+".wufoo.com/forms/"+formID+"/def/"+rawBody;
+			//console.log(rawBody);
+
+			var redirectBody =	'<!DOCTYPE html>'+
+					'<html>'+
+						'<head>'+
+						'</head>'+
+						'<body>'+
+							"<label for=moddedURL>Modified URL for Prefilling</label>"+
+							"<textarea name=moddedURL>"+fullBody+"</textarea>"+
+							'</br>'+
+							'<a href='+fullBody+' target="_blank">Refill</a>'+
+						'</body>'+
+					'</html>';
+			response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+			response.write(redirectBody);
+				
+			response.end();
+
+			
+			
+		});
+		
 	}
 	else if(request.method === "GET"){
 		
@@ -126,11 +175,6 @@ function results(request, response){
 		var fullBody = "https://"+subdomain+".wufoo.com/forms/"+formID+"/def/"+rawBody;
 		console.log(rawBody);
 
-
-		// console.log("FormID "+formID);
-		// console.log("EntryID "+entryID);
-
-		var recoveredURL;
 		var redirectBody =	'<!DOCTYPE html>'+
 				'<html>'+
 					'<head>'+
