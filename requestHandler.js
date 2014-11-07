@@ -89,51 +89,6 @@ function rebuild(request, response){
 		var query = url_parts.query;
 		console.log("Handling GET for "+request.url);
 
-
-		rawBody = query;
-		console.log(rawBody);
-
-		var decodedBody = rawBody;
-		var formID = wunode.parseFormURL(decodedBody.formID);
-		var entryID = decodedBody.entryID;
-		// console.log("FormID "+formID);
-		// console.log("EntryID "+entryID);
-
-		var recoveredURL;
-		wunode.refillEntry(formID, entryID, function(result){
-			var redirectBody = "";
-			if(result === "ERROR"){
-				console.log("Error, try again");
-				recoveredURL = result;
-				redirectBody =	'<!DOCTYPE html>'+
-				'<html>'+
-					'<head>'+
-					'</head>'+
-					'<body>'+
-						'<script>alert("No entry found"); console.log("Test"); window.location.href = "https://michaellimsm.wufoo.com/forms/wucovery/";</script>'+
-					'</body>'+
-				'</html>';
-				response.writeHead(200, "OK", {'Content-Type': 'text/html'});
-				response.write(redirectBody);
-			
-				response.end();
-			}
-			else{
-				recoveredURL = result;
-				redirectBody =	'<!DOCTYPE html>'+
-				'<html>'+
-					'<head>'+
-					'</head>'+
-					'<body>'+
-						'<script>console.log("Test"); window.location.href = "'+recoveredURL+'";</script>'+
-					'</body>'+
-				'</html>';
-				response.writeHead(200, "OK", {'Content-Type': 'text/html'});
-				response.write(redirectBody);
-			
-				response.end();
-			}
-		});
 	}
 	else{
 		response.writeHead(405, "Method not supported", {"Content-Type": "text/plain"});
