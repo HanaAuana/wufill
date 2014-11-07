@@ -126,6 +126,7 @@ function results(request, response){
 			var parsedBody;
 			for (var property in decodedBody) { //Need to get POST values into object format, iterate
 				if(property.indexOf("Field") > -1){
+					console.log("Property: "+property+" and value: "+decodedBody[property]);
 					parsedBody += property+"="+encodeURIComponent(decodedBody[property])+"&";
 				}
 			}

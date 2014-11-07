@@ -35,7 +35,9 @@ Wuform.prototype.buildForm = function(fields){
 		}
 		//Call appropriate helper method to build HTML for this field
 		//For Checkbox, MulipleChoice, Dropdown, pass choices/subfields
+		console.log(fieldType);
 		switch (fieldType) {
+
 			case "text":
 				formHTML += this.buildText(fieldLabel, fieldID);
 				break;
@@ -121,21 +123,22 @@ Wuform.prototype.buildParagraph = function(fieldLabel, fieldID){
 Wuform.prototype.buildCheckbox = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='checkbox'  name="+fieldID+">";
+	console.log(choices);
 	//create checkbox input for each other choice
 	for (var i = 0; i < choices.length; i++) {
 		fieldHTML += "<label for="+choices[i].ID+">"+choices[i].Label+"</label>";
-		fieldHTML += "<input type='checkbox'  name="+choices[i].Label+">";
+		fieldHTML += "<input type='checkbox'  name='"+choices[i].ID+"' data-val='"+choices[i].Label+"' value='"+choices[i].Label+"'>";
 	}
 	return fieldHTML;
 };
 
 Wuform.prototype.buildMultipleChoice = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='radio'  name="+fieldID+">";
+	fieldHTML += "<input type='radio'  name="+fieldID+" value= '"+fieldLabel+"''>";
 	//create another radio for each choice, same name, different value (choice.label)
 	for (var i = 0; i < choices.length; i++) {
 		fieldHTML += "<label for="+fieldID+">"+choices[i].Label+"</label>";
-		fieldHTML += "<input type='radio'  name="+fieldID+">";
+		fieldHTML += "<input type='radio'  name="+fieldID+" value='"+choices[i].Label+"''>";
 	}
 	return fieldHTML;
 };
@@ -144,8 +147,10 @@ Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){ //TODO 
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<select name="+fieldID+">";
 	//add option tag, one for each choice value=choice.label
+	console.log(choices);
 	for (var i = 0; i < choices.length; i++) {
-		fieldHTML += "<option value="+choices[i].Label+">"+choices[i].Label+"</option>";
+		console.log(choices[i].Label);
+		fieldHTML += "<option value='"+choices[i].Label+"''>"+choices[i].Label+"</option>";
 	}
 	fieldHTML += "</select>";
 	return fieldHTML;
