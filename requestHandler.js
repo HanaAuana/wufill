@@ -181,7 +181,9 @@ function results(request, response){
 					'<head>'+
 					'</head>'+
 					'<body>'+
-						fullBody+'</br>'+
+						"<label for=moddedURL>Modified URL for Prefilling</label>"+
+						"<textarea name=moddedURL>"+fullBody+"</textarea>"+
+						'</br>'+
 						'<a href='+fullBody+' target="_blank">Refill</a>'+
 					'</body>'+
 				'</html>';
