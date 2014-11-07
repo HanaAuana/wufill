@@ -30,7 +30,6 @@ Wufoo.prototype.buildOptions = function(verb, resource){
 			pass: "footastic"
 		}
 	};
-
 	return options;
 };
 
@@ -41,7 +40,7 @@ Wufoo.prototype.request = function(options, callback){
 		}
 		else{
 			console.log("CODE "+response.statusCode);
-			console.log("ERROR "+error);
+			console.log("ERROR "+ error);
 			callback("ERROR");
 		}
 	});
@@ -57,7 +56,7 @@ Wufoo.prototype.getForms = function(callback){
 	
 	var options = this.buildOptions(reqMethod, resource);
 
-	console.log(reqMethod+": "+resource);
+	//console.log(reqMethod+": "+resource);
 	//Make call to helper Wufoo.request method
 	this.request(options, callback);
 };
@@ -83,7 +82,7 @@ Wufoo.prototype.getFields = function(formID, pretty, system, callback){
 	
 	var options = this.buildOptions(reqMethod, resource);
 
-	console.log(reqMethod+": "+resource);
+	//console.log(reqMethod+": "+resource);
 	//Make call to helper Wufoo.request method
 	this.request(options, callback);
 };
@@ -250,4 +249,4 @@ Wufoo.prototype.parseSubdomain = function(formURL){
 	//console.log("Subdomain:"+formURL.substring(start+2, end));
 	return formURL.substring(start+2, end);
 };
-module.exports = new Wufoo("subdomain",  "apiKey", "secretCode");
+module.exports = new Wufoo("fishbowl",  "AOI6-LFKL-VM1Q-IEX9", "secretCode");
