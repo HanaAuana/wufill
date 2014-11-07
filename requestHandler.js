@@ -13,16 +13,16 @@ function start(request, response){
 
 					'</head>'+
 					'<body>'+
-						'<script>
-							  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-							  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-							  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-							  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+						'<script>'+
+							  '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){'+
+							  '(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),'+
+							  'm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)'+
+							  '})(window,document,"script","//www.google-analytics.com/analytics.js","ga");'+
 
-							  ga("create", "UA-56543903-1", "auto");
-							  ga("send", "pageview");
+							  'ga("create", "UA-56543903-1", "auto");'+
+							  'ga("send", "pageview");'+
 
-						</script>'+
+						'</script>'+
 						'<form enctype="application/x-www-form-urlencoded" action="/rebuild" method="post">'+
 						'<label for="formID">Form ID:</label>'+
 						'<input type="text" name ="formID"/>'+
@@ -77,16 +77,16 @@ function rebuild(request, response){
 												
 											"</head>"+
 											"<body>"+
-												'<script>
-													  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-													  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-													  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-													  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+												'<script>'+
+														  '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){'+
+														  '(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),'+
+														  'm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)'+
+														  '})(window,document,"script","//www.google-analytics.com/analytics.js","ga");'+
 
-													  ga("create", "UA-56543903-1", "auto");
-													  ga("send", "pageview");
+														  'ga("create", "UA-56543903-1", "auto");'+
+														  'ga("send", "pageview");'+
 
-												</script>'+
+												'</script>'+
 												"<form 'application/x-www-form-urlencoded' action='/results' method='post'>"+
 													"<input type='hidden' name=subdomain value="+subdomain+">"+
 													"<input type='hidden' name=formID value="+formID+">";
@@ -166,16 +166,16 @@ function results(request, response){
 							
 						'</head>'+
 						'<body>'+
-							'<script>
-								  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-								  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-								  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-								  })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+							'<script>'+
+								  '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){'+
+								  '(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),'+
+								  'm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)'+
+								  '})(window,document,"script","//www.google-analytics.com/analytics.js","ga");'+
 
-								  ga("create", "UA-56543903-1", "auto");
-								  ga("send", "pageview");
+								  'ga("create", "UA-56543903-1", "auto");'+
+								  'ga("send", "pageview");'+
 
-							</script>'+
+							'</script>'+
 							"<label for=moddedURL>Modified URL for Prefilling</label>"+
 							"<textarea name=moddedURL>"+fullBody+"</textarea>"+
 							'</br>'+
