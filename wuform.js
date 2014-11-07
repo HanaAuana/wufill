@@ -113,24 +113,35 @@ Wuform.prototype.buildParagraph = function(fieldLabel, fieldID){
 	return fieldHTML;
 };
 
-Wuform.prototype.buildCheckbox = function(fieldLabel, fieldID, choices){
+Wuform.prototype.buildCheckbox = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='checkbox'  name="+fieldID+">";
-	//create checkbox input for each choice
+	//create checkbox input for each other choice
+	for (var i = 0; i < choices.length; i++) {
+		fieldHTML += "<label for="+choices[i].fieldID+">"+choices[i].label+"</label>";
+		fieldHTML += "<input type='checkbox'  name="+choices[i].label+">";
+	}
 	return fieldHTML;
 };
 
-Wuform.prototype.buildMultipleChoice = function(fieldLabel, fieldID, choices){
+Wuform.prototype.buildMultipleChoice = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='radio'  name="+fieldID+">";
 	//create another radio for each choice, same name, different value (choice.label)
+	for (var i = 0; i < choices.length; i++) {
+		fieldHTML += "<label for="+fieldID+">"+choices[i].label+"</label>";
+		fieldHTML += "<input type='radio'  name="+fieldID+">";
+	}
 	return fieldHTML;
 };
 
-Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){
+Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<select name="+fieldID+">";
 	//add option tag, one for each choice value=choice.label
+	for (var i = 0; i < choices.length; i++) {
+		fieldHTML += "<option value="+choices[i].label+">";
+	}
 	fieldHTML += "</select>";
 	return fieldHTML;
 };
@@ -151,9 +162,9 @@ Wuform.prototype.buildFile = function(fieldLabel, fieldID){
 	return fieldHTML;
 };
 
-Wuform.prototype.buildAddress = function(fieldLabel, fieldID){
+Wuform.prototype.buildAddress = function(fieldLabel, fieldID){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='text'  name="+fieldID+">";
+	fieldHTML += "<input type='address'  name="+fieldID+">";
 	return fieldHTML;
 };
 
@@ -193,15 +204,15 @@ Wuform.prototype.buildPrice = function(fieldLabel, fieldID){
 	return fieldHTML;
 };
 
-Wuform.prototype.buildLikert = function(fieldLabel, fieldID){
+Wuform.prototype.buildLikert = function(fieldLabel, fieldID){ //TODO
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='text'  name="+fieldID+">";
 	return fieldHTML;
 };
 
-Wuform.prototype.buildRating = function(fieldLabel, fieldID){
+Wuform.prototype.buildRating = function(fieldLabel, fieldID){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='text'  name="+fieldID+">";
+	fieldHTML += "<input type='rating'  name="+fieldID+">";
 	return fieldHTML;
 };
 
