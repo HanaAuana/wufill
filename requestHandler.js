@@ -49,7 +49,6 @@ function rebuild(request, response){
 
 			wunode.setSubdomain(subdomain);
 			wunode.setApiKey(apiKey);
-			wunode.setFormID(formID);
 
 			var fields;
 			wunode.getFields(formID, false, false, function(result){
