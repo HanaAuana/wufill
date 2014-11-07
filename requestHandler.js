@@ -39,11 +39,12 @@ function rebuild(request, response){
 		});
 
 		request.on("end", function(){
-			
+
 			var decodedBody = querystring.parse(rawBody);
 			//console.log(decodedBody);
 
 			var subdomain = wunode.parseSubdomain(decodedBody.formID);
+			console.log("SUB "+subdomain);
 			var formID = wunode.parseFormURL(decodedBody.formID);
 			var apiKey = decodedBody.apiKey;
 
@@ -64,11 +65,12 @@ function rebuild(request, response){
 											"<head>"+
 											"</head>"+
 											"<body>"+
-												"<form 'application/x-www-form-urlencoded' action='/results' method='get'>"+
+												"<form 'application/x-www-form-urlencoded' action='/results' method='post'>"+
 													"<input type='hidden' name=subdomain value="+subdomain+">"+
 													"<input type='hidden' name=formID value="+formID+">";
 
 					redirectBody += wuform.buildForm(fields);
+					console.log("SUB "+subdomain);
 					redirectBody +=					"<input type='submit' value='Submit' />"+
 												"</form>"+
 											"</body>"+
@@ -109,27 +111,30 @@ function results(request, response){
 		});
 
 		request.on("end", function(){
-			
+			//TEMP FIX //TODO
+			rawBody = rawBody.substring(9);
 			//Get POST values //TODO
-			//var decodedBody = querystring.parse(rawBody);
+			console.log(rawBody);
+			var decodedBody = querystring.parse(rawBody);
 			//console.log(decodedBody);
 
 			//Extract Subdomain and formID from POST //TODO
-			var subdomain;
-			var formID;
+			var subdomain = decodedBody.subdomain;
+			var formID = decodedBody.formID;
 
 			//Loop through POST values and parse into key/value pairs //TODO
 			var parsedBody;
-			// for (var property in query) { //Need to get POST values into object format, iterate
-			// 	if(property.indexOf("Field") > -1){
-			// 		rawBody += property+"="+encodeURIComponent(query[property])+"&";
-			// 	}
-			// }
-			// //Remove the last &
-			// rawBody = rawBody.slice(0, -1);
-
+			for (var property in decodedBody) { //Need to get POST values into object format, iterate
+				if(property.indexOf("Field") > -1){
+					parsedBody += property+"="+encodeURIComponent(decodedBody[property])+"&";
+				}
+			}
+			//Remove the last &
+			parsedBody = parsedBody.slice(0, -1);
+			//TEMP FIX //TODO
+			parsedBody = parsedBody.substring(9);
 			//Use parsedBody instead
-			var fullBody = "https://"+subdomain+".wufoo.com/forms/"+formID+"/def/"+rawBody;
+			var fullBody = "https://"+subdomain+".wufoo.com/forms/"+formID+"/def/"+parsedBody;
 			//console.log(rawBody);
 
 			var redirectBody =	'<!DOCTYPE html>'+

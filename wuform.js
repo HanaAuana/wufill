@@ -25,8 +25,13 @@ Wuform.prototype.buildForm = function(fields){
 		if(fieldLabel === "Date Created" ||fieldLabel === "Created By" || fieldLabel === "Last Updated" || fieldLabel === "Updated By"){
 			continue;
 		}
-		if(fieldType === "checkbox" ||fieldType === "radio" || fieldType === "select" || fieldType === "likert"){
+		if(fieldType === "radio" || fieldType === "select" || fieldType === "likert"){
 			choices = fields[i].Choices;
+			//console.log(fields[i]);
+		}
+		else if(fieldType === "checkbox" ){
+			choices = fields[i].SubFields;
+			//console.log(fields[i]);
 		}
 		//Call appropriate helper method to build HTML for this field
 		//For Checkbox, MulipleChoice, Dropdown, pass choices/subfields
@@ -118,8 +123,8 @@ Wuform.prototype.buildCheckbox = function(fieldLabel, fieldID, choices){ //TODO 
 	fieldHTML += "<input type='checkbox'  name="+fieldID+">";
 	//create checkbox input for each other choice
 	for (var i = 0; i < choices.length; i++) {
-		fieldHTML += "<label for="+choices[i].fieldID+">"+choices[i].label+"</label>";
-		fieldHTML += "<input type='checkbox'  name="+choices[i].label+">";
+		fieldHTML += "<label for="+choices[i].ID+">"+choices[i].Label+"</label>";
+		fieldHTML += "<input type='checkbox'  name="+choices[i].Label+">";
 	}
 	return fieldHTML;
 };
@@ -129,7 +134,7 @@ Wuform.prototype.buildMultipleChoice = function(fieldLabel, fieldID, choices){ /
 	fieldHTML += "<input type='radio'  name="+fieldID+">";
 	//create another radio for each choice, same name, different value (choice.label)
 	for (var i = 0; i < choices.length; i++) {
-		fieldHTML += "<label for="+fieldID+">"+choices[i].label+"</label>";
+		fieldHTML += "<label for="+fieldID+">"+choices[i].Label+"</label>";
 		fieldHTML += "<input type='radio'  name="+fieldID+">";
 	}
 	return fieldHTML;
@@ -140,7 +145,7 @@ Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){ //TODO 
 	fieldHTML += "<select name="+fieldID+">";
 	//add option tag, one for each choice value=choice.label
 	for (var i = 0; i < choices.length; i++) {
-		fieldHTML += "<option value="+choices[i].label+">";
+		fieldHTML += "<option value="+choices[i].Label+">"+choices[i].Label+"</option>";
 	}
 	fieldHTML += "</select>";
 	return fieldHTML;
@@ -212,7 +217,7 @@ Wuform.prototype.buildLikert = function(fieldLabel, fieldID){ //TODO
 
 Wuform.prototype.buildRating = function(fieldLabel, fieldID){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='rating'  name="+fieldID+">";
+	fieldHTML += "<input type='range'  name="+fieldID+">";
 	return fieldHTML;
 };
 
