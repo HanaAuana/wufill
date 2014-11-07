@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "wufill",
   "dependencies": {
-    "request": "~2.0"
+    "request": ">2.37"
   },
   "main": "wufill.js",
   "repository": {
