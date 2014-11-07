@@ -1,0 +1,13 @@
+{
+  "name": "wufill",
+  "version": "0.0.0",
+  "description": "wufill",
+  "dependencies": {
+    "request": "~2.0"
+  },
+  "main": "wufill.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HanaAuana/wufill.git"
+  }
+}
