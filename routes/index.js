@@ -29,32 +29,17 @@ router.post('/rebuild', function(req, res){
 	wunode.setSubdomain(subdomain);
     wunode.setApiKey(apiKey);
 
-	var fields;
+	var formFields;
 	wunode.getFields(formID, false, false, function(result){
 		var redirectBody = "";
 		if(result === "ERROR"){
 
 		}
 		else{
-			fields = result.Fields;
+			formFields = result.Fields;
 			//Create form using fields, and wuform.buildForm logic
 			//Render form
-			redirectBody = "<!DOCTYPE html>"+
-                                    "<html>"+
-                                        "<head>"+
-                                        "</head>"+
-                                        "<body>"+
-
-                                            "<form 'application/x-www-form-urlencoded' action='/results' method='post'>"+
-                                                "<input type='hidden' name=subdomain value="+subdomain+">"+
-                                                "<input type='hidden' name=formID value="+formID+">";
-
-                redirectBody += wuform.buildForm(fields);
-                redirectBody +=                 "<input type='submit' value='Submit' />"+
-                                            "</form>"+
-                                        "</body>"+
-                                    "</html>";
-                res.send(redirectBody);
+            res.render('rebuild', {fields:formFields, sub:subdomain, form:formID});
 		}
 	});
 

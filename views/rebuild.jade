@@ -1,9 +1,26 @@
 extends ./layout.jade
+include fields/fields.jade
 block content
-	div 
-		form(enctype="application/x-www-form-urlencoded", action="/rebuild", method="post")
-			label(for="formID") Form ID:
-			input(type="text", name="formID")
-			label(for="apiKey") API Key:
-			input(type="text", name="apiKey")
-			input(type="submit", value="Submit")
+	div
+		form(enctype="application/x-www-form-urlencoded", action="/results", method="post")
+			input(type='hidden', name='subdomain', value=sub)
+			input(type='hidden', name='formID', value=form)
+			each field in fields
+				if field.Title === "Entry Id" || field.Title === "Created By" || field.Title === "Updated By"
+				else if field.Type === "text"
+					+text(field.ID, field.Title)
+				else if field.Type === "number"
+					mixin number(field.ID, field.Title)
+				else if field.Type === "textarea"
+					mixin paragraph(field.ID, field.Title)
+				else if field.Type === "checkbox"
+					mixin checkbox(field.ID, field.Title, field.SubFields)
+				else if field.Type === "radio"
+					mixin multiplechoice(field.ID, field.Title, field.Choices)
+				else if field.Type === "select"
+					mixin dropdown(field.ID, field.Title, field.Choices)
+				else if field.Type === "shortname"
+					mixin name(field.ID, field.Title, field.Choices)
+				else if field.Type === "text"
+					+text(field.ID, field.Title)
+			input(type='submit', value='Submit')
