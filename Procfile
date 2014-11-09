@@ -1,1 +1,1 @@
-web: node wufill.js
+web: npm start
