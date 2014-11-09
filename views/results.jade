@@ -1,0 +1,8 @@
+extends ./layout.jade
+block content
+	div 
+		label(for="moddedURL") Modified URL for Prefilling
+		textarea(name="moddedURL") #{moddedURL}
+		br
+		a(href=moddedURL, target='_blank') Refill
+
