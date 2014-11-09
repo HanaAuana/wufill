@@ -25,12 +25,19 @@ Wuform.prototype.buildForm = function(fields){
 		if(fieldLabel === "Date Created" ||fieldLabel === "Created By" || fieldLabel === "Last Updated" || fieldLabel === "Updated By"){
 			continue;
 		}
-		if(fieldType === "checkbox" ||fieldType === "radio" || fieldType === "select" || fieldType === "likert"){
+		if(fieldType === "radio" || fieldType === "select" || fieldType === "likert"){
 			choices = fields[i].Choices;
+			//console.log(fields[i]);
+		}
+		else if(fieldType === "checkbox" ){
+			choices = fields[i].SubFields;
+			//console.log(fields[i]);
 		}
 		//Call appropriate helper method to build HTML for this field
 		//For Checkbox, MulipleChoice, Dropdown, pass choices/subfields
+		console.log(fieldType);
 		switch (fieldType) {
+
 			case "text":
 				formHTML += this.buildText(fieldLabel, fieldID);
 				break;
@@ -113,24 +120,38 @@ Wuform.prototype.buildParagraph = function(fieldLabel, fieldID){
 	return fieldHTML;
 };
 
-Wuform.prototype.buildCheckbox = function(fieldLabel, fieldID, choices){
+Wuform.prototype.buildCheckbox = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='checkbox'  name="+fieldID+">";
-	//create checkbox input for each choice
+	console.log(choices);
+	//create checkbox input for each other choice
+	for (var i = 0; i < choices.length; i++) {
+		fieldHTML += "<label for="+choices[i].ID+">"+choices[i].Label+"</label>";
+		fieldHTML += "<input type='checkbox'  name='"+choices[i].ID+"' data-val='"+choices[i].Label+"' value='"+choices[i].Label+"'>";
+	}
 	return fieldHTML;
 };
 
-Wuform.prototype.buildMultipleChoice = function(fieldLabel, fieldID, choices){
+Wuform.prototype.buildMultipleChoice = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='radio'  name="+fieldID+">";
+	fieldHTML += "<input type='radio'  name="+fieldID+" value= '"+fieldLabel+"''>";
 	//create another radio for each choice, same name, different value (choice.label)
+	for (var i = 0; i < choices.length; i++) {
+		fieldHTML += "<label for="+fieldID+">"+choices[i].Label+"</label>";
+		fieldHTML += "<input type='radio'  name="+fieldID+" value='"+choices[i].Label+"''>";
+	}
 	return fieldHTML;
 };
 
-Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){
+Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<select name="+fieldID+">";
 	//add option tag, one for each choice value=choice.label
+	console.log(choices);
+	for (var i = 0; i < choices.length; i++) {
+		console.log(choices[i].Label);
+		fieldHTML += "<option value='"+choices[i].Label+"''>"+choices[i].Label+"</option>";
+	}
 	fieldHTML += "</select>";
 	return fieldHTML;
 };
@@ -151,9 +172,9 @@ Wuform.prototype.buildFile = function(fieldLabel, fieldID){
 	return fieldHTML;
 };
 
-Wuform.prototype.buildAddress = function(fieldLabel, fieldID){
+Wuform.prototype.buildAddress = function(fieldLabel, fieldID){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='text'  name="+fieldID+">";
+	fieldHTML += "<input type='address'  name="+fieldID+">";
 	return fieldHTML;
 };
 
@@ -193,15 +214,15 @@ Wuform.prototype.buildPrice = function(fieldLabel, fieldID){
 	return fieldHTML;
 };
 
-Wuform.prototype.buildLikert = function(fieldLabel, fieldID){
+Wuform.prototype.buildLikert = function(fieldLabel, fieldID){ //TODO
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='text'  name="+fieldID+">";
 	return fieldHTML;
 };
 
-Wuform.prototype.buildRating = function(fieldLabel, fieldID){
+Wuform.prototype.buildRating = function(fieldLabel, fieldID){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
-	fieldHTML += "<input type='text'  name="+fieldID+">";
+	fieldHTML += "<input type='range'  name="+fieldID+">";
 	return fieldHTML;
 };
 

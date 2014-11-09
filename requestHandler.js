@@ -10,8 +10,19 @@ function start(request, response){
 				'<html>'+
 					'<head>'+
 						'<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'+
+						'<script>'+
+							  '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){'+
+							  '(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),'+
+							  'm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)'+
+							  '})(window,document,"script","//www.google-analytics.com/analytics.js","ga");'+
+
+							  'ga("create", "UA-56543903-1", "auto");'+
+							  'ga("send", "pageview");'+
+
+						'</script>'+
 					'</head>'+
 					'<body>'+
+						
 						'<form enctype="application/x-www-form-urlencoded" action="/rebuild" method="post">'+
 						'<label for="formID">Form ID:</label>'+
 						'<input type="text" name ="formID"/>'+
@@ -39,11 +50,12 @@ function rebuild(request, response){
 		});
 
 		request.on("end", function(){
-			
+
 			var decodedBody = querystring.parse(rawBody);
 			//console.log(decodedBody);
 
 			var subdomain = wunode.parseSubdomain(decodedBody.formID);
+			console.log("SUB "+subdomain);
 			var formID = wunode.parseFormURL(decodedBody.formID);
 			var apiKey = decodedBody.apiKey;
 
@@ -62,13 +74,25 @@ function rebuild(request, response){
 					redirectBody = "<!DOCTYPE html>"+
 										"<html>"+
 											"<head>"+
+												'<script>'+
+													  '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){'+
+													  '(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),'+
+													  'm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)'+
+													  '})(window,document,"script","//www.google-analytics.com/analytics.js","ga");'+
+
+													  'ga("create", "UA-56543903-1", "auto");'+
+													  'ga("send", "pageview");'+
+
+												'</script>'+
 											"</head>"+
 											"<body>"+
-												"<form 'application/x-www-form-urlencoded' action='/results' method='get'>"+
+
+												"<form 'application/x-www-form-urlencoded' action='/results' method='post'>"+
 													"<input type='hidden' name=subdomain value="+subdomain+">"+
 													"<input type='hidden' name=formID value="+formID+">";
 
 					redirectBody += wuform.buildForm(fields);
+					console.log("SUB "+subdomain);
 					redirectBody +=					"<input type='submit' value='Submit' />"+
 												"</form>"+
 											"</body>"+
@@ -89,51 +113,6 @@ function rebuild(request, response){
 		var query = url_parts.query;
 		console.log("Handling GET for "+request.url);
 
-
-		rawBody = query;
-		console.log(rawBody);
-
-		var decodedBody = rawBody;
-		var formID = wunode.parseFormURL(decodedBody.formID);
-		var entryID = decodedBody.entryID;
-		// console.log("FormID "+formID);
-		// console.log("EntryID "+entryID);
-
-		var recoveredURL;
-		wunode.refillEntry(formID, entryID, function(result){
-			var redirectBody = "";
-			if(result === "ERROR"){
-				console.log("Error, try again");
-				recoveredURL = result;
-				redirectBody =	'<!DOCTYPE html>'+
-				'<html>'+
-					'<head>'+
-					'</head>'+
-					'<body>'+
-						'<script>alert("No entry found"); console.log("Test"); window.location.href = "https://michaellimsm.wufoo.com/forms/wucovery/";</script>'+
-					'</body>'+
-				'</html>';
-				response.writeHead(200, "OK", {'Content-Type': 'text/html'});
-				response.write(redirectBody);
-			
-				response.end();
-			}
-			else{
-				recoveredURL = result;
-				redirectBody =	'<!DOCTYPE html>'+
-				'<html>'+
-					'<head>'+
-					'</head>'+
-					'<body>'+
-						'<script>console.log("Test"); window.location.href = "'+recoveredURL+'";</script>'+
-					'</body>'+
-				'</html>';
-				response.writeHead(200, "OK", {'Content-Type': 'text/html'});
-				response.write(redirectBody);
-			
-				response.end();
-			}
-		});
 	}
 	else{
 		response.writeHead(405, "Method not supported", {"Content-Type": "text/plain"});
@@ -147,6 +126,70 @@ function results(request, response){
 	console.log("Request handler for 'results' ");
 	if(request.method === "POST"){
 		console.log("Handling POST");
+		
+
+		request.on("data", function(chunk){
+			rawBody += chunk.toString();
+		});
+
+		request.on("end", function(){
+			//TEMP FIX //TODO
+			rawBody = rawBody.substring(9);
+			//Get POST values //TODO
+			console.log(rawBody);
+			var decodedBody = querystring.parse(rawBody);
+			//console.log(decodedBody);
+
+			//Extract Subdomain and formID from POST //TODO
+			var subdomain = decodedBody.subdomain;
+			var formID = decodedBody.formID;
+
+			//Loop through POST values and parse into key/value pairs //TODO
+			var parsedBody;
+			for (var property in decodedBody) { //Need to get POST values into object format, iterate
+				if(property.indexOf("Field") > -1){
+					console.log("Property: "+property+" and value: "+decodedBody[property]);
+					parsedBody += property+"="+encodeURIComponent(decodedBody[property])+"&";
+				}
+			}
+			//Remove the last &
+			parsedBody = parsedBody.slice(0, -1);
+			//TEMP FIX //TODO
+			parsedBody = parsedBody.substring(9);
+			//Use parsedBody instead
+			var fullBody = "https://"+subdomain+".wufoo.com/forms/"+formID+"/def/"+parsedBody;
+			//console.log(rawBody);
+
+			var redirectBody =	'<!DOCTYPE html>'+
+					'<html>'+
+						'<head>'+
+							'<script>'+
+								  '(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){'+
+								  '(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),'+
+								  'm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)'+
+								  '})(window,document,"script","//www.google-analytics.com/analytics.js","ga");'+
+
+								  'ga("create", "UA-56543903-1", "auto");'+
+								  'ga("send", "pageview");'+
+
+							'</script>'+
+						'</head>'+
+						'<body>'+
+							
+							"<label for=moddedURL>Modified URL for Prefilling</label>"+
+							"<textarea name=moddedURL>"+fullBody+"</textarea>"+
+							'</br>'+
+							'<a href='+fullBody+' target="_blank">Refill</a>'+
+						'</body>'+
+					'</html>';
+			response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+			response.write(redirectBody);
+				
+			response.end();
+
+			
+			
+		});
 		
 	}
 	else if(request.method === "GET"){
@@ -171,17 +214,14 @@ function results(request, response){
 		var fullBody = "https://"+subdomain+".wufoo.com/forms/"+formID+"/def/"+rawBody;
 		console.log(rawBody);
 
-
-		// console.log("FormID "+formID);
-		// console.log("EntryID "+entryID);
-
-		var recoveredURL;
 		var redirectBody =	'<!DOCTYPE html>'+
 				'<html>'+
 					'<head>'+
 					'</head>'+
 					'<body>'+
-						fullBody+'</br>'+
+						"<label for=moddedURL>Modified URL for Prefilling</label>"+
+						"<textarea name=moddedURL>"+fullBody+"</textarea>"+
+						'</br>'+
 						'<a href='+fullBody+' target="_blank">Refill</a>'+
 					'</body>'+
 				'</html>';
