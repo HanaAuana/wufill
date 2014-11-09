@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	div 
+		form#formStart(name="startform", action="/rebuild", method="post")
+			label(for="formID") Form ID:
+			input(type="text", name="formID")
+			label(for="apiKey") API Key:
+			input(type="text", name="apiKey")
+			input(type="submit", value="Submit")

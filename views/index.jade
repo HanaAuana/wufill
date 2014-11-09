@@ -1,9 +1,5 @@
-extends ./layout.jade
+extends layout
+
 block content
-	div 
-		form(enctype="application/x-www-form-urlencoded", action="/rebuild", method="post")
-			label(for="formID") Form ID:
-			input(type="text", name="formID")
-			label(for="apiKey") API Key:
-			input(type="text", name="apiKey")
-			input(type="submit", value="Submit")
+  h1= title
+  p Welcome to #{title}
