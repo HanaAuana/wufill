@@ -1,10 +1,14 @@
 extends layout
 
 block content
+	h1 Wufill
 	div 
 		form#formStart(name="startform", action="/rebuild", method="post")
-			label(for="formID") Form ID:
-			input(type="text", name="formID")
-			label(for="apiKey") API Key:
-			input(type="text", name="apiKey")
-			input(type="submit", value="Submit")
+			div.input
+				label(for="formID") Form ID:
+				input(type="text", name="formID")
+			div.input
+				label(for="apiKey") API Key :
+				input(type="text", name="apiKey")
+			div.submit
+				input(type="submit", value="Submit")

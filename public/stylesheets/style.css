@@ -1,8 +1,22 @@
 body {
-  padding: 50px;
+  padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #ff3300;
+  color: #ffffff;
 }
 
 a {
   color: #00B7FF;
+}
+
+div.input{
+	padding-bottom: 5px;
+}
+
+div.input label{
+	padding-right: 10px;
+}
+
+div.submit{
+	padding-top: 20px;
 }

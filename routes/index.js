@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var wuform= require('../wuform');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -37,7 +36,7 @@ router.post('/rebuild', function(req, res){
 		}
 		else{
 			formFields = result.Fields;
-			//Create form using fields, and wuform.buildForm logic
+			//Create form using jade template
 			//Render form
             res.render('rebuild', {fields:formFields, sub:subdomain, form:formID});
 		}

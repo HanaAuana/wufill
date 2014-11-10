@@ -1,99 +1,99 @@
 mixin text(fieldID, fieldLabel)
-	div#text
+	div.text
 		label(for=fieldID) #{fieldLabel}
 		input(type='text', name=fieldID)
 
 mixin number(fieldID, fieldLabel)
-	div#number
+	div.number
 		label(for=fieldID) #{fieldLabel}
 		input(type='number', name=fieldID)
 
 mixin paragraph(fieldID, fieldLabel)
-	div#paragraph
+	div.paragraph
 		label(for=fieldID) #{fieldLabel}
 		textarea(name=fieldID)
 
 mixin checkbox(fieldID, fieldLabel, choices)
-	div#checkbox
+	div.checkbox
 		label(for=fieldID) #{fieldLabel}
 		each choice in choices
-			div#box
+			div.box
 				label(for=choice.ID) #{choice.Label}
 				input(type='checkbox', name=choice.ID, data-val=choice.Label, value=choice.Label)
 
 mixin multiplechoice(fieldID, fieldLabel, choices)
-	div#mulitplechoice
+	div.mulitplechoice
 		label(for=fieldID) #{fieldLabel}
 		each choice in choices
-			div#choice
+			div.choice
 				label(for=fieldID) #{choice.Label}
 				input(type='radio', name=fieldID, value=choice.Label)
 
 mixin dropdown(fieldID, fieldLabel, choices)
-	div#dropdown
+	div.dropdown
 		label(for=fieldID) #{fieldLabel}
 		select(name=fieldID)
 			each choice in choices
 				option(value=choice.Label) #{choice.Label}
 
 mixin name(fieldID, fieldLabel)
-	div#name
+	div.name
 		label(for=fieldID) #{fieldLabel}
-		div#subname
+		div.subname
 			input(type='text', name=fieldID)
 			label(for='') First
 		-var lastNameID = parseInt(fieldID.substring(5))+1;
-		div#subname
+		div.subname
 			input(type='text', name="Field"+lastNameID)
 			label(for='') Last
 
 mixin file(fieldID, fieldLabel)
-	div#file
+	div.file
 		label(for=fieldID) #{fieldLabel}
 		input(type='file', name=fieldID)
 
 mixin address(fieldID, fieldLabel)
-	div#address
+	div.address
 		label(for=fieldID) #{fieldLabel}
 		input(type='address', name=fieldID)
 
 mixin date(fieldID, fieldLabel)
-	div#date
+	div.date
 		label(for=fieldID) #{fieldLabel}
 		input(type='date', name=fieldID)
 
 mixin email(fieldID, fieldLabel)
-	div#email
+	div.email
 		label(for=fieldID) #{fieldLabel}
 		input(type='email', name=fieldID)
 
 mixin time(fieldID, fieldLabel)
-	div#time
+	div.time
 		label(for=fieldID) #{fieldLabel}
 		input(type='time', name=fieldID)
 
 mixin phone(fieldID, fieldLabel)
-	div#phone
+	div.phone
 		label(for=fieldID) #{fieldLabel}
 		input(type='phone', name=fieldID)
 
 mixin website(fieldID, fieldLabel)
-	div#website
+	div.website
 		label(for=fieldID) #{fieldLabel}
 		input(type='url', name=fieldID)
 
 mixin price(fieldID, fieldLabel)
-	div#price
+	div.price
 		label(for=fieldID) #{fieldLabel}
 		input(type='money', name=fieldID)
 
 mixin likert(fieldID, fieldLabel)
-	div#likert
+	div.likert
 		label(for=fieldID) #{fieldLabel}
 		input(type='text', name=fieldID)
 
 mixin rating(fieldID, fieldLabel)
-	div#rating
+	div.rating
 		label(for=fieldID) #{fieldLabel}
 		input(type='range', name=fieldID, min='0', max='5')
 
