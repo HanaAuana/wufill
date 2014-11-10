@@ -46,3 +46,54 @@ mixin name(fieldID, fieldLabel)
 		div#subname
 			input(type='text', name="Field"+lastNameID)
 			label(for='') Last
+
+mixin file(fieldID, fieldLabel)
+	div#file
+		label(for=fieldID) #{fieldLabel}
+		input(type='file', name=fieldID)
+
+mixin address(fieldID, fieldLabel)
+	div#address
+		label(for=fieldID) #{fieldLabel}
+		input(type='address', name=fieldID)
+
+mixin date(fieldID, fieldLabel)
+	div#date
+		label(for=fieldID) #{fieldLabel}
+		input(type='date', name=fieldID)
+
+mixin email(fieldID, fieldLabel)
+	div#email
+		label(for=fieldID) #{fieldLabel}
+		input(type='email', name=fieldID)
+
+mixin time(fieldID, fieldLabel)
+	div#time
+		label(for=fieldID) #{fieldLabel}
+		input(type='time', name=fieldID)
+
+mixin phone(fieldID, fieldLabel)
+	div#phone
+		label(for=fieldID) #{fieldLabel}
+		input(type='phone', name=fieldID)
+
+mixin website(fieldID, fieldLabel)
+	div#website
+		label(for=fieldID) #{fieldLabel}
+		input(type='url', name=fieldID)
+
+mixin price(fieldID, fieldLabel)
+	div#price
+		label(for=fieldID) #{fieldLabel}
+		input(type='money', name=fieldID)
+
+mixin likert(fieldID, fieldLabel)
+	div#likert
+		label(for=fieldID) #{fieldLabel}
+		input(type='text', name=fieldID)
+
+mixin rating(fieldID, fieldLabel)
+	div#rating
+		label(for=fieldID) #{fieldLabel}
+		input(type='range', name=fieldID, min='0', max='5')
+

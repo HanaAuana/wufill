@@ -6,7 +6,7 @@ block content
 			input(type='hidden', name='subdomain', value=sub)
 			input(type='hidden', name='formID', value=form)
 			each field in fields
-				if field.Title === "Entry Id" || field.Title === "Created By" || field.Title === "Updated By"
+				if field.Title === "Entry Id" || field.Title === "Created By" || field.Title === "Updated By" || field.Title === "Date Created" || field.Title === "Last Updated"
 				else if field.Type === "text"
 					+text(field.ID, field.Title)
 				else if field.Type === "number"
@@ -21,6 +21,24 @@ block content
 					mixin dropdown(field.ID, field.Title, field.Choices)
 				else if field.Type === "shortname"
 					mixin name(field.ID, field.Title, field.Choices)
-				else if field.Type === "text"
-					+text(field.ID, field.Title)
+				else if field.Type === "file"
+					+file(field.ID, field.Title)
+				else if field.Type === "address"
+					+address(field.ID, field.Title)
+				else if field.Type === "date"
+					+date(field.ID, field.Title)
+				else if field.Type === "email"
+					+email(field.ID, field.Title)
+				else if field.Type === "time"
+					+time(field.ID, field.Title)
+				else if field.Type === "phone"
+					+phone(field.ID, field.Title)
+				else if field.Type === "url"
+					+website(field.ID, field.Title)
+				else if field.Type === "money"
+					+price(field.ID, field.Title)
+				else if field.Type === "likert"
+					+likert(field.ID, field.Title)
+				else if field.Type === "rating"
+					+rating(field.ID, field.Title)
 			input(type='submit', value='Submit')
