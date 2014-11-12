@@ -29,7 +29,6 @@ block content
 						else if field.Type === "file"
 							//+file(field.ID, field.Title)
 						else if field.Type === "address"
-							-console.log(field)
 							+address(field.ID, field.Title, field.SubFields)
 						else if field.Type === "date"
 							+date(field.ID, field.Title)
@@ -46,5 +45,5 @@ block content
 						else if field.Type === "likert"
 							//+likert(field.ID, field.Title)
 						else if field.Type === "rating"
-							//+rating(field.ID, field.Title)
+							+rating(field.ID, field.Title)
 				input.pure-button(type='submit', value='Submit')
