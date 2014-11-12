@@ -38,9 +38,20 @@ mixin file(fieldID, fieldLabel)
 		label(for=fieldID) #{fieldLabel}
 		input(type='file', name=fieldID)
 
-mixin address(fieldID, fieldLabel)
+mixin address(fieldID, fieldLabel, subFields)
 		label(for=fieldID) #{fieldLabel}
-		input(type='address', name=fieldID)
+		input(type='text', name=fieldID placeholder="Street")
+		-var nextID = parseInt(fieldID.substring(5))+1;
+		input(type='text', name="Field"+nextID placeholder="Street Line 2")
+		-nextID++;
+		input(type='text', name="Field"+nextID placeholder="City")
+		-nextID++;
+		label(for="Field"+nextID) #{fieldLabel} cont.
+		input(type='text', name="Field"+nextID placeholder="State")
+		-nextID++;
+		input(type='number', name="Field"+nextID placeholder="Postal Code")
+		-nextID++;
+		input(type='text', name="Field"+nextID placeholder="Country")
 
 mixin date(fieldID, fieldLabel)
 		label(for=fieldID) #{fieldLabel}
