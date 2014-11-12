@@ -3,9 +3,11 @@ block content
 	div.header
 		h1 Results
 	div.content
-		h2.content-subhead Copy the text or click the link to prefill your form
-		label(for="moddedURL") Modified URL for Prefilling
-		textarea(name="moddedURL") https://#{sub}.wufoo.com/forms/#{form}/def/#{body}
-		br
-		a(href="https://#{sub}.wufoo.com/forms/#{form}/def/#{body}", target='_blank') Refill
+		h2.content-subhead Copy the text or click the button to prefill your form
+		form.pure-form.pure-form-stacked(name="results")
+			fieldset
+				label(for="moddedURL") Modified URL for Prefilling
+				textarea(name="moddedURL") https://#{sub}.wufoo.com/forms/#{form}/def/#{body}
+		form(action="https://#{sub}.wufoo.com/forms/#{form}/def/#{body}" target='_blank')
+			input.pure-button(type='submit', value='Refill')
 
