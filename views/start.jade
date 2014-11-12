@@ -1,14 +1,16 @@
 extends layout
 
 block content
-	h1 Wufill
-	div 
-		form#formStart(name="startform", action="/rebuild", method="post")
-			div.input
+	div.header
+		h1 Start Wufilling!
+	div.content
+		h2.content-subhead Just paste in your form link and your API Key
+		form.pure-form.pure-form-stacked(name="startform", action="/rebuild", method="post")
+			fieldset
 				label(for="formID") Form ID:
 				input(type="text", name="formID")
-			div.input
+
 				label(for="apiKey") API Key :
 				input(type="text", name="apiKey")
-			div.submit
-				input(type="submit", value="Submit")
+
+				input.pure-button(type="submit", value="Submit")

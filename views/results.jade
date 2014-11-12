@@ -1,6 +1,9 @@
 extends ./layout.jade
 block content
-	div 
+	div.header
+		h1 Results
+	div.content
+		h2.content-subhead Copy the text or click the link to prefill your form
 		label(for="moddedURL") Modified URL for Prefilling
 		textarea(name="moddedURL") https://#{sub}.wufoo.com/forms/#{form}/def/#{body}
 		br
