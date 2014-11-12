@@ -1,8 +1,8 @@
 body {
-  padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #DC4945;
   color: #ffffff;
+  margin: 0px;
 }
 
 a {
@@ -12,11 +12,33 @@ div,
 div.input{
 	padding-bottom: 5px;
 }
+h1#banner{
+	width: 100%;
+	text-align: center;
+}
+div#left, div#right{
+	width: 10%;
+}
+div#form{
+	width: 80%;
+	display: inline-block;
+	padding: 10px;
+	margin:10px;
+	background-color: #DC4945;
+	padding-left: 30px;
+}
+div#left{
+	float: left;
+}
+div#right{
+	float: right;
+}
 
 div label, div.input label{
 	padding-right: 10px;
 }
 
-div.submit{
+input.submit{
 	padding-top: 20px;
+	margin-left: 50%;
 }

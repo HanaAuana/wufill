@@ -1,7 +1,10 @@
 extends ./layout.jade
 include fields/fields.jade
 block content
-	div
+	h1#banner Rebuild
+	div#left
+	div#form 
+		div Title: #{form}
 		form(enctype="application/x-www-form-urlencoded", action="/results", method="post")
 			input(type='hidden', name='subdomain', value=sub)
 			input(type='hidden', name='formID', value=form)
@@ -42,3 +45,4 @@ block content
 				else if field.Type === "rating"
 					+rating(field.ID, field.Title)
 			input(type='submit', value='Submit')
+	div#right
