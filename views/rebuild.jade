@@ -1,5 +1,13 @@
 extends ./layout.jade
 include fields/fields.jade
+block menu
+	div.pure-menu.pure-menu-open
+		a.pure-menu-heading(href="https://wufill.herokuapp.com") Wufill
+		ul
+			li 
+				a(href="/start") Start Over
+			li 
+				a(href="#") Prefilling
 block content
 	div.header
 		h1 Prefill your form

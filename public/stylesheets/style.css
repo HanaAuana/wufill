@@ -1,9 +1,13 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #DC4945;
-  color: #ffffff;
+  //background-color: #DC4945;
+  color: #db7866;
 }
 
 a {
-  color: #00B7FF;
+  color: #85bfd2;
+}
+a:hover{
+	color:#db7866;
+	text-decoration:underline
 }

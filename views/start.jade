@@ -1,10 +1,16 @@
 extends layout
-
+block menu
+	div.pure-menu.pure-menu-open
+		a.pure-menu-heading(href="https://wufill.herokuapp.com") Wufill
+		ul
+			li 
+				a(href="#") Start
 block content
 	div.header
-		h1 Start Wufilling!
+		h1  Wufill
+		h3 Prefill your Wufoo froms
 	div.content
-		h2.content-subhead Just paste in your form link and your API Key
+		h2.content-subhead Enter your form link and API Key
 		form.pure-form.pure-form-stacked(name="startform", action="/rebuild", method="post")
 			fieldset
 				label(for="formID") Form ID:

@@ -1,4 +1,14 @@
 extends ./layout.jade
+block menu
+	div.pure-menu.pure-menu-open
+		a.pure-menu-heading(href="https://wufill.herokuapp.com") Wufill
+		ul
+			li 
+				a(href="/start") Start Over
+			li 
+				a(href="#") Results
+			li 
+				a(href="https://#{sub}.wufoo.com/forms/#{form}/" target='_blank') Blank Form
 block content
 	div.header
 		h1 Results
