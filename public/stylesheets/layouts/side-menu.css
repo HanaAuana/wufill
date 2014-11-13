@@ -126,17 +126,21 @@ appears on the left side of the page.
         */
         #menu .pure-menu li a:hover,
         #menu .pure-menu li a:focus {
-            background: #99c46e
+            background: #AE87C4;
         }
 
     /*
     This styles the selected menu item `<li>`.
     */
-    #menu .pure-menu-selected,
+    #menu .pure-menu-selected, #menu .pure-menu-selected a{
+        background: #99c46e;
+        color: #fff;
+    }
     #menu .pure-menu-heading {
         background: #818da7;
         color: #fff;
     }
+
         /*
         This styles a link within a selected menu item `<li>`.
         */
