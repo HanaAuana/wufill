@@ -12,7 +12,11 @@ block content
 	div.header
 		h1 Prefill your form
 	div.content
-		h2.content-subhead Form ID: #{form}
+		div.pure-g
+			div.pure-u-1-2
+				h2.content-subhead Subdomain: #{sub}
+			div.pure-u-1-2
+				h2.content-subhead Form ID: #{form}
 		form.pure-form.pure-form-aligned(enctype="application/x-www-form-urlencoded", action="/results", method="post")
 			input(type='hidden', name='subdomain', value=sub)
 			input(type='hidden', name='formID', value=form)
@@ -54,4 +58,7 @@ block content
 							//+likert(field.ID, field.Title)
 						else if field.Type === "rating"
 							+rating(field.ID, field.Title)
-				input.pure-button(type='submit', value='Submit')
+				br
+				div.pure-control-group
+					label(for='submit')		
+					input.pure-button(name="submit" type='submit', value='Submit')
