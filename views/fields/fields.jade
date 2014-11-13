@@ -67,7 +67,7 @@ mixin time(fieldID, fieldLabel)
 
 mixin phone(fieldID, fieldLabel)
 		label(for=fieldID) #{fieldLabel}
-		input(type='phone', name=fieldID)
+		input(type='number', name=fieldID)
 
 mixin website(fieldID, fieldLabel)
 		label(for=fieldID) #{fieldLabel}
@@ -75,7 +75,7 @@ mixin website(fieldID, fieldLabel)
 
 mixin price(fieldID, fieldLabel)
 		label(for=fieldID) #{fieldLabel}
-		input(type='money', name=fieldID)
+		input(type='number', name=fieldID)
 
 mixin likert(fieldID, fieldLabel)
 		label(for=fieldID) #{fieldLabel}
