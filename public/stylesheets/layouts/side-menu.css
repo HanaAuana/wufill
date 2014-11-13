@@ -1,6 +1,12 @@
 body {
     
 }
+p{
+    padding: 10px;
+    background-color: #f4f1f1;
+    border-radius: 10px;
+    color: #6d696e;
+}
 
 .pure-img-responsive {
     max-width: 100%;
