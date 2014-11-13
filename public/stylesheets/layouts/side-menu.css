@@ -1,5 +1,8 @@
 body {
-    
+      font: 14px "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  //background-color: #DC4945;
+  color: #db7866;
 }
 p{
     padding: 10px;
@@ -216,6 +219,40 @@ small screens.
         .menu-link span:after {
             margin-top: 0.6em;
         }
+
+/* --------------------------
+ * Footer Module Styles
+ * --------------------------
+*/
+
+.footer {
+    font-size: 87.5%;
+    border-top: 1px solid #eee;
+    margin-top: 3.4286em;
+    padding: 1.1429em;
+    background: rgb(250, 250, 250);
+}
+
+.legal {
+    line-height: 1.6;
+    text-align: center;
+    margin: 0 auto;
+}
+
+    .legal-license {
+        margin-top: 0;
+    }
+    .legal-links {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 0;
+    }
+    .legal-copyright {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+
 
 
 /* -- Responsive Styles (Media Queries) ------------------------------------- */
