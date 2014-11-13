@@ -35,7 +35,7 @@ Wuform.prototype.buildForm = function(fields){
 		}
 		//Call appropriate helper method to build HTML for this field
 		//For Checkbox, MulipleChoice, Dropdown, pass choices/subfields
-		console.log(fieldType);
+		//console.log(fieldType);
 		switch (fieldType) {
 
 			case "text":
@@ -90,8 +90,8 @@ Wuform.prototype.buildForm = function(fields){
 				formHTML += this.buildRating(fieldLabel, fieldID);
 				break;
 			default:
-				console.log("Found "+fieldType); 
-				break; 
+				console.log("Found "+fieldType);
+				break;
 		}
 		formHTML+= "</br>";
 	}
@@ -123,7 +123,7 @@ Wuform.prototype.buildParagraph = function(fieldLabel, fieldID){
 Wuform.prototype.buildCheckbox = function(fieldLabel, fieldID, choices){ //TODO check
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='checkbox'  name="+fieldID+">";
-	console.log(choices);
+	//console.log(choices);
 	//create checkbox input for each other choice
 	for (var i = 0; i < choices.length; i++) {
 		fieldHTML += "<label for="+choices[i].ID+">"+choices[i].Label+"</label>";
@@ -147,9 +147,9 @@ Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){ //TODO 
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<select name="+fieldID+">";
 	//add option tag, one for each choice value=choice.label
-	console.log(choices);
+	//console.log(choices);
 	for (var i = 0; i < choices.length; i++) {
-		console.log(choices[i].Label);
+		//console.log(choices[i].Label);
 		fieldHTML += "<option value='"+choices[i].Label+"''>"+choices[i].Label+"</option>";
 	}
 	fieldHTML += "</select>";
@@ -159,10 +159,10 @@ Wuform.prototype.buildDropdown = function(fieldLabel, fieldID, choices){ //TODO 
 Wuform.prototype.buildName = function(fieldLabel, fieldID){
 	var fieldHTML = "<label for="+fieldID+">"+fieldLabel+"</label>";
 	fieldHTML += "<input type='text'  name="+fieldID+">";
-	fieldHTML += "<label for='' >First</label>"
+	fieldHTML += "<label for='' >First</label>";
 	var lastNameID = parseInt(fieldID.substring(5))+1;
 	fieldHTML += "<input type='text'  name=Field"+(lastNameID)+">";
-	fieldHTML += "<label for='' >Last</label>"
+	fieldHTML += "<label for='' >Last</label>";
 	return fieldHTML;
 };
 
@@ -230,7 +230,7 @@ Wuform.prototype.buildRating = function(fieldLabel, fieldID){ //TODO check
 // wunode.setApiKey("M8X9-0MP5-63FD-EUG8");
 // wunode.getFields("papqekz17234pt", false, false, function(fields){
 
-// 	console.log(buildForm(fields));
+// console.log(buildForm(fields));
 
 // });
 

@@ -1,0 +1,27 @@
+extends layout
+block menu
+	div.pure-menu.pure-menu-open
+		a.pure-menu-heading(href="https://wufill.herokuapp.com") Wufill
+		ul
+			li.pure-menu-selected 
+				a(href="#") Start
+			li 
+				form(id="quickForm" name="quickForm", action="/rebuild", method="post")
+					input(type='hidden', name='apiKey', value='AOI6-LFKL-VM1Q-IEX9')
+					input(type='hidden', name='formID', value='https://fishbowl.wufoo.com/forms/web-hook-example/')
+					a(href="#" onclick="document.getElementById('quickForm').submit();") Example
+block content
+	div.header
+		h1  Wufill
+		h3 Prefill your Wufoo forms
+	div.content
+		h2.content-subhead Enter your form link and API Key
+		form.pure-form.pure-form-stacked(name="startform", action="/rebuild", method="post")
+			fieldset
+				label(for="formID") Form ID:
+				input(type="text", name="formID")
+
+				label(for="apiKey") API Key :
+				input(type="text", name="apiKey")
+				br
+				input.pure-button(type="submit", value="Submit")
