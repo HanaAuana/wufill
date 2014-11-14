@@ -1,3 +1,7 @@
+html, body{
+    height:100%;
+}
+
 body {
       font: 14px "Open Sans", Helvetica, Arial, sans-serif;
       font-family: 'Open Sans', sans-serif;
@@ -14,6 +18,16 @@ p.instruct{
 input[type='radio']{
     margin-left: 5px;
     margin-bottom: 3px;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -6em;
+}
+.footer, .push {
+    height: 2em;
 }
 
 .pure-img-responsive {
@@ -274,7 +288,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     }
 
     #layout {
-        //padding-left: 150px; /* left col width "#menu" */
+        padding-left: 150px; /* left col width "#menu" */
         left: 0;
     }
     #menu {
