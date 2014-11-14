@@ -62,7 +62,8 @@ router.post("/results", function(req, res){
     var parsedBody;
     for (var property in decodedBody) { //Need to get POST values into object format, iterate
         if(property.indexOf("Field") > -1){
-            parsedBody += property+"="+encodeURIComponent(decodedBody[property])+"&";
+            var sanitized = decodedBody[property].replace(/#/g, "").replace(/&/g, "").replace(/\+/g, "").replace(/\/\//g, "");
+            parsedBody += property+"="+encodeURIComponent(sanitized)+"&";
         }
     }
     //Remove the last &
