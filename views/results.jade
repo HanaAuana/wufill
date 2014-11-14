@@ -13,11 +13,21 @@ block content
 	div.header
 		h1 Results
 	div.content
-		h2.content-subhead Copy the text or click the button to prefill your form
-		form.pure-form.pure-form-stacked(name="results")
-			fieldset
-				label(for="moddedURL") Modified URL for Prefilling
-				textarea(name="moddedURL") https://#{sub}.wufoo.com/forms/#{form}/def/#{body}
-		form(action="https://#{sub}.wufoo.com/forms/#{form}/def/#{body}" target='_blank')
-			input.pure-button(type='submit', value='Refill')
-
+		div.pure-g
+			div.pure-u-2-5
+				h2.content-subhead Copy the text or click the button to prefill your form
+				form.pure-form.pure-form-stacked(name="results")
+					fieldset
+						label(for="moddedURL") Modified URL for Prefilling
+						textarea(name="moddedURL") https://#{sub}.wufoo.com/forms/#{form}/def/#{body}
+				form(action="https://#{sub}.wufoo.com/forms/#{form}/def/#{body}" target='_blank')
+					input.pure-button(type='submit', value='Refill')
+			div.pure-u-1-5
+			div.pure-u-2-5
+				h2.content-subhead Next Steps
+				h4 Click the button to see your changes in action
+				p.instruct Your values will be added right into your Wufoo form
+				h4 Copy the URL
+				p.instruct You can use it wherever you would use a regular form URL
+				h4 Do it again
+				p.instruct Hit "Back" in your browser to make some changes, or click "Start Over" to prefill a new form

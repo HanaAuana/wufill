@@ -14,17 +14,19 @@ mixin checkbox(fieldID, fieldLabel, choices)
 		label.pure-checkbox(for=fieldID) #{fieldLabel}
 		each choice in choices
 			label(for=choice.ID) #{choice.Label}
-			input(type='checkbox', name=choice.ID, data-val=choice.Label, value=choice.Label)
+			input(type='checkbox', id=choice.ID, name=choice.ID, data-val=choice.Label, value=choice.Label)
 
 mixin multiplechoice(fieldID, fieldLabel, choices)
-		label.pure-radio(for=fieldID) #{fieldLabel}
+		label #{fieldLabel}
 		each choice in choices
-			label(for=fieldID) #{choice.Label}
-			input(type='radio', name=fieldID, value=choice.Label)
+			label.pure-radio #{choice.Label}
+				input(type='radio', name=fieldID, value=choice.Label)
+				
 
 mixin dropdown(fieldID, fieldLabel, choices)
 		label(for=fieldID) #{fieldLabel}
 		select(name=fieldID)
+			option(value="")
 			each choice in choices
 				option(value=choice.Label) #{choice.Label}
 

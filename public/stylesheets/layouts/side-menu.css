@@ -4,11 +4,16 @@ body {
       //background-color: #DC4945;
       color: #db7866;
 }
-p{
+p.instruct{
     padding: 10px;
     background-color: #f4f1f1;
     border-radius: 10px;
     color: #6d696e;
+}
+
+input[type='radio']{
+    margin-left: 5px;
+    margin-bottom: 3px;
 }
 
 .pure-img-responsive {
@@ -226,15 +231,15 @@ small screens.
 */
 
 .footer {
-    font-size: 87.5%;
+    font-size: 75%;
     border-top: 1px solid #eee;
     margin-top: 3.4286em;
-    padding: 1.1429em;
+    padding: 0.95em;
     background: rgb(250, 250, 250);
 }
 
 .legal {
-    line-height: 1.6;
+    line-height: 1;
     text-align: center;
     margin: 0 auto;
 }
