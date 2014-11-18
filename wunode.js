@@ -107,6 +107,27 @@ Wufoo.prototype.getEntriesForm = function(formID, pretty, callback){
 	this.request(options, callback);
 };
 
+//Pass a username and password, and receive the user's API Key
+//Passing true for "pretty" will break parsing, so should be avoided
+Wufoo.prototype.getLoginAPI = function(integrationKey, email, password, domain, callback){
+	var path = "login";
+	var format = ".json";
+	var reqMethod = "POST";
+	var resource = "https://wufoo.com/api/v3/"+path+format;
+	//var resource = "https://dpma2633wfn5.runscope.net";
+	var options = {
+		method: "POST",
+		uri: resource,
+		json: true,
+		'form':'integrationKey='+integrationKey+'&email='+encodeURIComponent(email)+'&password='+encodeURIComponent(password)+'&subdomain='+domain
+		//}
+	};
+
+	console.log(reqMethod+": "+resource);
+	//Make call to helper Wufoo.request method
+	this.request(options, callback);
+};
+
 Wufoo.prototype.getFormURL = function(formID, defaultValues){
 	var url =  "https://"+this.subdomain+".wufoo.com/forms/"+formID;
 	if(defaultValues){
