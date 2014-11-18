@@ -21,29 +21,31 @@ router.post('/rebuild', function(req, res){
 
 	//Get form values
 	var formID = wunode.parseFormURL(req.body.formID);
-	var apiKey = req.body.apiKey;
-	//console.log(formID);
-	wunode.setSubdomain(subdomain);
-	wunode.setApiKey(apiKey);
+    var subdomain = wunode.parseSubdomain(req.body.formID);
+    wunode.setSubdomain(subdomain);
+    //console.log("SUB "+subdomain);
+    var that = this;
+    wunode.getLoginAPI(process.env.LoginKey, req.body.email, req.body.password, subdomain, function(loginResult){
+        //console.log(formID);
+        var apiKey = loginResult.ApiKey; 
+        wunode.setSubdomain(subdomain);
+        wunode.setApiKey(apiKey);
 
-	var subdomain = wunode.parseSubdomain(req.body.formID);
+        var formFields;
+        wunode.getFields(formID, false, false, function(result){
+            var redirectBody = "";
+            if(result === "ERROR"){
 
-	wunode.setSubdomain(subdomain);
-    wunode.setApiKey(apiKey);
-
-	var formFields;
-	wunode.getFields(formID, false, false, function(result){
-		var redirectBody = "";
-		if(result === "ERROR"){
-
-		}
-		else{
-			formFields = result.Fields;
-			//Create form using jade template
-			//Render form
-            res.render('rebuild', {fields:formFields, sub:subdomain, form:formID});
-		}
-	});
+            }
+            else{
+                formFields = result.Fields;
+                //Create form using jade template
+                //Render form
+                res.render('rebuild', {fields:formFields, sub:subdomain, form:formID});
+            }
+        });
+    });
+	
 
 });
 

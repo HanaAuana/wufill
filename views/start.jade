@@ -17,21 +17,24 @@ block content
 	div.content
 		div.pure-g
 			div.pure-u-2-5
-				h2.content-subhead Enter your form link and API Key
+				h2.content-subhead Enter your form's URL and your Wufoo login info
 				form.pure-form.pure-form-stacked(name="startform", action="/rebuild", method="post")
 					fieldset
-						label(for="formID") Form ID:
+						label(for="formID") Form URL:
 						input(type="text", name="formID")
 
-						label(for="apiKey") API Key :
-						input(type="text", name="apiKey")
+						label(for="email") Email :
+						input(type="email", name="email")
+
+						label(for="password") Password :
+						input(type="password", name="password")
 						br
 						input.pure-button(type="submit", value="Submit")
 			div.pure-u-1-5
 			div.pure-u-2-5.sidebar
 				h2.content-subhead Instructions
-				h4 1. Fill in your Form ID and API info
-				p.instruct Just copy your full form link into the Form ID box. You can find your API Key in Wufoo
+				h4 1. Fill in your Form URL and Wufoo login
+				p.instruct Just copy your full form link into the Form URL box.
 				h4 2. Add the values you want to prefill
 				p.instruct Go ahead, just type away. Pretend it's your Wufoo form
 				h4 3. Grab the modified URL 
