@@ -15,6 +15,9 @@ router.get('/start', function(req, res){
 router.post('/rebuild', function(req, res){
 	//Set local wunode instance
 	var wunode = req.wunode;
+    //Get Wufoo login info from request body
+
+    //Make Wufoo Login API call to get API key
 
 	//Get form values
 	var formID = wunode.parseFormURL(req.body.formID);
@@ -59,7 +62,8 @@ router.post("/results", function(req, res){
     var parsedBody;
     for (var property in decodedBody) { //Need to get POST values into object format, iterate
         if(property.indexOf("Field") > -1){
-            parsedBody += property+"="+encodeURIComponent(decodedBody[property])+"&";
+            var sanitized = decodedBody[property].replace(/#/g, "").replace(/&/g, "").replace(/\+/g, "").replace(/\/\//g, "");
+            parsedBody += property+"="+encodeURIComponent(sanitized)+"&";
         }
     }
     //Remove the last &
