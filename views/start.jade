@@ -4,7 +4,7 @@ block menu
 		a.pure-menu-heading(href="https://wufill.herokuapp.com") Wufill
 		ul
 			li.pure-menu-selected 
-				a(href="#") Start
+				a(href="/start") Start
 			li 
 				form(id="quickForm" name="quickForm", action="/rebuild", method="post")
 					input(type='hidden', name='apiKey', value='AOI6-LFKL-VM1Q-IEX9')
@@ -17,7 +17,10 @@ block content
 	div.content
 		div.pure-g
 			div.pure-u-2-5
-				h2.content-subhead Enter your form's URL and your Wufoo login info
+				if tryFailed === true
+					h2.content-subhead Something wasn't right, please try again
+				else if tryFailed === false
+					h2.content-subhead Enter your form's URL and your Wufoo login info
 				form.pure-form.pure-form-stacked(name="startform", action="/rebuild", method="post")
 					fieldset
 						label(for="formID") Form URL:

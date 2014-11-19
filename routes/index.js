@@ -8,25 +8,29 @@ router.get('/', function(req, res) {
 
 //GET start page
 router.get('/start', function(req, res){
-	res.render('start');
+	res.render('start',  {tryFailed: false});
+});
+
+//GET tryagain page
+router.get('/tryagain', function(req, res){
+    res.render('start', {tryFailed: true});
 });
 
 //POST Rebuild
 router.post('/rebuild', function(req, res){
+    if(req.body.formID === '' || req.body.email === '' || req.body.password === ''){
+        res.redirect('/tryagain');
+        next();
+    }
 	//Set local wunode instance
 	var wunode = req.wunode;
     //Get Wufoo login info from request body
-
-    //Make Wufoo Login API call to get API key
-
-	//Get form values
-	var formID = wunode.parseFormURL(req.body.formID);
+    var formID = wunode.parseFormURL(req.body.formID);
     var subdomain = wunode.parseSubdomain(req.body.formID);
+    
     wunode.setSubdomain(subdomain);
-    //console.log("SUB "+subdomain);
-    var that = this;
+    //Make Wufoo Login API call to get API key
     wunode.getLoginAPI(process.env.LoginKey, req.body.email, req.body.password, subdomain, function(loginResult){
-        //console.log(formID);
         var apiKey = loginResult.ApiKey;
         wunode.setSubdomain(subdomain);
         wunode.setApiKey(apiKey);
@@ -35,7 +39,7 @@ router.post('/rebuild', function(req, res){
         wunode.getFields(formID, false, false, function(result){
             var redirectBody = "";
             if(result === "ERROR"){
-
+                res.redirect('/tryagain');
             }
             else{
                 formFields = result.Fields;

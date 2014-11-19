@@ -31,16 +31,21 @@ Wufoo.prototype.buildOptions = function(verb, resource){
 };
 
 Wufoo.prototype.request = function(options, callback){
-	request(options, function(error, response, body){
-		if (!error && response.statusCode === 200){
-			callback(body);
-		}
-		else{
-			console.log("CODE "+response.statusCode);
-			console.log("ERROR "+ error);
-			callback("ERROR");
-		}
-	});
+	try {
+		request(options, function(error, response, body){
+			if (!error && response.statusCode === 200){
+				callback(body);
+			}
+			else{
+				console.log("CODE "+response.statusCode);
+				callback("ERROR");
+			}
+		});
+	} catch (error) {
+		console.log("ERROR caught");
+		callback("ERROR");
+	}
+	
 };
 
 //Pass a JSON containing an array of Forms in JSON format to the callback argument
@@ -113,6 +118,9 @@ Wufoo.prototype.getFormURL = function(formID, defaultValues){
 
 //Given a URL for a form, get the form hash or form name for identifying the correct form
 Wufoo.prototype.parseFormURL = function(formURL){
+	if(formURL === ''){
+		return '';
+	}
 	var start = formURL.indexOf("/forms/");
 	if (start === -1){
 		return formURL;
@@ -123,6 +131,9 @@ Wufoo.prototype.parseFormURL = function(formURL){
 
 //Given a URL for a form, get the subdomain
 Wufoo.prototype.parseSubdomain = function(formURL){
+	if(formURL === ''){
+		return '';
+	}
 	var start = formURL.indexOf("//");
 	var end = formURL.indexOf(".wufoo.com/forms/");
 	if (start === -1 || end === -1){
