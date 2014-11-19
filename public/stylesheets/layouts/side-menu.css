@@ -5,9 +5,16 @@ html, body{
 body {
       font: 14px "Open Sans", Helvetica, Arial, sans-serif;
       font-family: 'Open Sans', sans-serif;
-      //background-color: #DC4945;
       color: #db7866;
 }
+a {
+  color: #85bfd2;
+}
+a:hover{
+    color:#db7866;
+    text-decoration:underline
+}
+
 p.instruct{
     padding: 10px;
     background-color: #f4f1f1;

@@ -27,7 +27,7 @@ router.post('/rebuild', function(req, res){
     var that = this;
     wunode.getLoginAPI(process.env.LoginKey, req.body.email, req.body.password, subdomain, function(loginResult){
         //console.log(formID);
-        var apiKey = loginResult.ApiKey; 
+        var apiKey = loginResult.ApiKey;
         wunode.setSubdomain(subdomain);
         wunode.setApiKey(apiKey);
 
