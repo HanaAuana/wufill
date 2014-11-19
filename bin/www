@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+require('newrelic');
+var debug = require('debug')('wufill');
+var app = require('../app');
+
+app.set('port', process.env.PORT || 3000);
+app.set('env', 'proc');
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
