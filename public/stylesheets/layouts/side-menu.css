@@ -21,6 +21,9 @@ p.instruct{
     border-radius: 10px;
     color: #6d696e;
 }
+img.made{
+    float: right;
+}
 
 input[type='radio']{
     margin-left: 5px;
@@ -316,6 +319,13 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 @media (max-width: 400px) {
 
     .sidebar{
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    .made{
         display: none;
     }
 }
