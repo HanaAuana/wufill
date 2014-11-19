@@ -25,13 +25,13 @@ block content
 				form.pure-form.pure-form-stacked(name="startform", action="/rebuild", method="post")
 					fieldset
 						label(for="formID") Form URL:
-						input(type="text", name="formID")
+						input(type="text", name="formID" required)
 
 						label(for="email") Email :
-						input(type="email", name="email")
+						input(type="email", name="email" required)
 
 						label(for="password") Password :
-						input(type="password", name="password")
+						input(type="password", name="password" required)
 						br
 						input.pure-button(type="submit", value="Submit")
 			div.pure-u-1-5
